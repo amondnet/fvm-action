@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Setup Fvm ${{ matrix.dart-version }}
-        uses: ../../
+        uses: ./
         with:
           channel: ${{ matrix.sdk-version }}
 
