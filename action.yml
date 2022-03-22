@@ -1,0 +1,38 @@
+name: 'Flutter action'
+description: 'Setup your runner with Flutter environment'
+author: 'Minsu Lee'
+branding:
+  icon: 'maximize'
+  color: 'blue'
+inputs:
+  version:
+    description: 'Flutter version'
+    default: ''
+    required: false
+  cache:
+    description: 'Cache the Flutter SDK'
+    required: false
+  cache-key:
+    description: 'Identifier for the Flutter SDK cache'
+    required: false
+    default: 'flutter'
+  cache-path:
+    description: 'Flutter SDK cache path'
+    required: false
+    default: ${{ runner.tool_cache }}/fvm
+  channel:
+    description: 'Identifier for the Flutter SDK cache'
+    required: false
+    default: 'stable'
+  global:
+    description: 'Set default Flutter version'
+    required: false
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+    - uses: dart-lang/setup-dart@v1
+    - run: dart pub global activate fvm
+      shell: bash
+    - run:  echo Y | fvm use $version
+      shell: bash

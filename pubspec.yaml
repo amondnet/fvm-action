@@ -1,0 +1,5 @@
+name: fvm_action
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+dependencies:
+  github_actions_toolkit:

@@ -1,0 +1,41 @@
+name: Test CLI
+
+on: [pull_request]
+
+jobs:
+  test:
+    name: "${{ matrix.sdk-version }} / ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        sdk-version: [stable] #, dev]
+        include:
+          - os: macOS-latest
+            TARGET: macos
+          - os: ubuntu-latest
+            TARGET: linux
+          - os: windows-latest
+            TARGET: windows
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup Fvm ${{ matrix.dart-version }}
+        uses: ../../
+        with:
+          channel: ${{ matrix.sdk-version }}
+
+      # - name: Setup Flutter ${{ matrix.sdk-version }}
+      #   uses: DanTup/gh-actions/setup-flutter@master
+      #   with:
+      #     channel: ${{ matrix.sdk-version }}
+
+      - name: Run doctor
+        run: fvm doctor
+
+      - name: Run dart doctor
+        run: dart doctor
+
+      - name: Run flutter doctor
+        run: flutter doctor
+

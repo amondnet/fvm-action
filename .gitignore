@@ -1,0 +1,6 @@
+.tmp
+.dart_tool
+.idea
+.pub-cache
+**.iml
+.fvm/flutter_sdk
